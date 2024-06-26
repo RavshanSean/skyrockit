@@ -32,11 +32,6 @@ app.use(
   })
 );
 
-
-app.use('/auth', authController);
-app.use(isSignedIn);
-app.use('/users/applications', applicationsController);
-
 app.use(passUserToView); 
 
 app.get('/', (req, res) => {
