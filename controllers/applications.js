@@ -46,10 +46,24 @@ router.get('/new', async (req, res) => {
       
     } catch (error) {
       console.log(error);
-      res.redirect('/')
+      res.redirect('/');
     }
   });
 
+  router.get('/:applicationId/edit', async (req, res) => { // controllers/applications.js
+    try {
+      const currentUser = await User.findById(req.session.user._id);
+      const application = currentUser.applications.id(req.params.applicationId);
+      res.render('applications/edit.ejs', {
+        application: application,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect('/')
+    }
+  });
+  
+  
   router.delete('/:applicationId', async (req, res) => { //delete from show ejs button make work 
     try {
   const currentUser = await User.findById(req.session.user._id);
